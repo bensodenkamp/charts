@@ -100,6 +100,33 @@ spec:
                   name: {{ include "discourse.redis.secretName" . }}
                   key: {{ include "discourse.redis.secretPasswordKey" . }}
             {{- end }}
+            {{- if .Values.smtpHost }}
+            - name: SMTP_HOST
+              value: {{ .Values.smtpHost | quote }}
+            {{- end }}
+            {{- if .Values.smtpPort }}
+            - name: SMTP_PORT
+              value: {{ .Values.smtpPort | quote }}
+            {{- end }}
+            {{- if .Values.smtpUser }}
+            - name: SMTP_USER
+              value: {{ .Values.smtpUser | quote }}
+            {{- end }}
+            {{- if .Values.smtpPassword  }}
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "common.names.fullname" . }}-discourse
+                  key: smtp-password
+            {{- end }}
+            {{- if .Values.smtpTls }}
+            - name: SMTP_TLS
+              value: {{ ternary "yes" "no" .Values.smtpTls | quote }}
+            {{- end }}
+            {{- if .Values.smtpAuth }}
+            - name: SMTP_AUTH
+              value: {{ .Values.smtpAuth | quote }}
+            {{- end }}
             {{- if .Values.discourse.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.discourse.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}

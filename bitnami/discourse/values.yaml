@@ -58,11 +58,11 @@ discourse:
   ## Discourse host to create application URLs. The port will be automatilly included.
   ## ref: https://github.com/bitnami/bitnami-docker-discourse#configuration
   ##
-  host: ''
+  host: ""
   ## Discourse site name
   ## ref: https://github.com/bitnami/bitnami-docker-discourse#environment-variables
   ##
-  siteName: 'My Site!'
+  siteName: "My Site!"
   ## User of the application
   ## ref: https://github.com/bitnami/bitnami-docker-discourse#environment-variables
   ##
@@ -87,6 +87,21 @@ discourse:
 
   ## Custom args for the custom command:
   # args: []
+
+  ## SMTP mail delivery configuration
+  ## ref: https://github.com/bitnami/bitnami-docker-discourse#smtp-configuration
+  ## @param smtpHost SMTP server host
+  ## @param smtpPort SMTP server port
+  ## @param smtpUser SMTP username
+  ## @param smtpPassword SMTP user password
+  ## @param smtpProtocol SMTP protocol
+  ##
+  smtpHost: ""
+  smtpPort: ""
+  smtpUser: ""
+  smtpPassword: ""
+  smtpTls: true
+  smtpAuth: "login"
 
   containerSecurityContext: {}
   ## capabilities:
@@ -182,11 +197,11 @@ sidekiq:
 
   ## Custom command to override image cmd
   ##
-  command: ['/app-entrypoint.sh']
+  command: ["/app-entrypoint.sh"]
 
   ## Custom args for the custom command:
   ##
-  args: ['nami', 'start', '--foreground', 'discourse-sidekiq']
+  args: ["nami", "start", "--foreground", "discourse-sidekiq"]
 
   ## Sidekiq resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
@@ -359,7 +374,7 @@ service:
   ##   http: <to set explicitly, choose port between 30000-32767>
   ##
   nodePorts:
-    http: ''
+    http: ""
 
 ## Ingress parameters
 ##
@@ -528,7 +543,7 @@ postgresql:
   ## PostgreSQL admin password (used when `postgresqlUsername` is not `postgres`)
   ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-user-on-first-run (see note!)
   ##
-  postgresqlPostgresPassword: 'bitnami'
+  postgresqlPostgresPassword: "bitnami"
   ## Name of existing secret object
   ## The secret should contain the following keys:
   ## postgresql-postgres-password (for the unprivileged user)
@@ -550,7 +565,7 @@ postgresql:
 externalDatabase:
   ## Database host
   ##
-  host: ''
+  host: ""
   ## Database port
   ##
   port: 5432
@@ -559,13 +574,13 @@ externalDatabase:
   user: bn_discourse
   ## Database password
   ##
-  password: ''
+  password: ""
   ## PostgreSQL admin user (used in the installation stage)
   ##
-  postgresqlPostgresUser: ''
+  postgresqlPostgresUser: ""
   ## PostgreSQL admin password (used in the installation stage)
   ##
-  postgresqlPostgresPassword: ''
+  postgresqlPostgresPassword: ""
   ## Name of existing secret object
   ## The secret should contain the following keys:
   ## postgresql-postgres-password (for the unprivileged user)
@@ -600,7 +615,7 @@ redis:
   ##
   ## Password key to be retrieved from Redis(TM) secret
   ##
-  existingSecretPasswordKey: 'redis-password'
+  existingSecretPasswordKey: "redis-password"
   ##
   ## Cluster settings
   ##
@@ -620,14 +635,14 @@ redis:
 externalRedis:
   ## Redis(TM) host
   ##
-  host: ''
+  host: ""
   ## Redis(TM) port
   ##
   port: 6379
   ## Redis(TM) password for authentication
   ## Ignored if existingSecret is set
   ##
-  password: ''
+  password: ""
   ##
   ## Name of existing secret object containing the password
   ##
@@ -635,4 +650,4 @@ externalRedis:
   ##
   ## Password key to be retrieved from Redis(TM) secret
   ##
-  existingSecretPasswordKey: 'redis-password'
+  existingSecretPasswordKey: "redis-password"
